@@ -25,6 +25,7 @@ public class Etiqueta {
     public String getDescripcion() {
         return descripcion;
     }
+   
     
     
 }

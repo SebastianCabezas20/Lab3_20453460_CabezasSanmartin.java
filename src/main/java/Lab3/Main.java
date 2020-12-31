@@ -69,10 +69,11 @@ public class Main {
             System.out.println("4-Aceptar respuesta");
             System.out.println("5-Cerrar sesion");
             System.out.println("6-Cerrar programa");
+            System.out.println("Ingrese opcion: ");
             opcion = entrada.nextInt();
             switch(opcion){
                 case 1:
-                    
+                    agregarPregunta(stack);
                     break;
                 case 2:
                     break;
@@ -97,6 +98,69 @@ public class Main {
             }
         }
         return 0;
+    }
+
+    private static void agregarPregunta(Stack stack) {
+        String contenido,titulo,nombreEtiqueta;
+        int opcion;
+        ListaEtiquetas etiquetas = new ListaEtiquetas();
+        Scanner entrada = new Scanner(System.in);
+        Scanner option = new Scanner(System.in);
+        System.out.println("Ingrese titulo de la pregunta: ");
+        titulo = entrada.nextLine();
+        System.out.println("Ingrese contenido de la pregunta");
+        contenido = entrada.nextLine();
+        int salida = 0;
+        int salidaEtiqueta = 0;
+        while(salida == 0){
+            System.out.println("Desea agregar etiquetas a la pregunta?");
+            System.out.println("1-SI");
+            System.out.println("2-NO");
+            System.out.println("Ingrese opcion: ");
+            opcion = option.nextInt();
+            if(opcion == 1){
+                while(salida == 0){
+                    stack.getListaEtiquetas().imprimir();
+                    System.out.println("Ingrese nombre de la etiqueta: ");
+                    nombreEtiqueta = entrada.nextLine();
+                    if(stack.getListaEtiquetas().verificarNombre(nombreEtiqueta)){
+                        if(!etiquetas.verificarNombre(nombreEtiqueta)){//caso que no exista el nombre en las nuevas etiquetas,se agrega
+                            etiquetas.agregarEtiqueta(stack.getListaEtiquetas().buscador(nombreEtiqueta));
+                        }
+                        else{
+                            System.out.println("LA ETIQUETA YA FUE INGRESADA");
+                        }
+                    }
+                    else{
+                        System.out.println("EL NOMBRE INGRESADO NO CORRESPONDE A UNA ETIQUETA");
+                    }
+                    while(salidaEtiqueta == 0)
+                    System.out.println("Desea agregar otra etiqueta?");
+                    System.out.println("1-SI");
+                    System.out.println("2-NO");
+                    System.out.println("Ingrese opcion: ");
+                    opcion = option.nextInt();
+                    if(opcion == 1){
+                        salidaEtiqueta = 1;
+                    }
+                    else if(opcion == 2){
+                        salidaEtiqueta = 1;
+                        salida = 1;
+                    }
+                    else{
+                        System.out.println("OPCION NO VALIDA");
+                    }
+                }
+                stack.ask(titulo,contenido,etiquetas);    
+            }
+            else if(opcion == 2){
+                stack.ask(titulo,contenido,etiquetas);
+                salida = 1;
+            }
+            else{
+                System.out.println("OPCION INGRESADA NO VALIDA.");
+            }
+        }
     }
     
     

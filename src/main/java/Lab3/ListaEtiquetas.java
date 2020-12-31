@@ -20,5 +20,25 @@ public class ListaEtiquetas {
     public void agregarEtiqueta(Etiqueta etiqueta){
         this.listaEtiquetas.add(etiqueta);
     }
-    
+    public void imprimir(){
+        for(int i = 0;i < this.listaEtiquetas.size();i++){
+            System.out.println("-"+i+1+this.listaEtiquetas.get(i).getEtiqueta()+"descripcion"+this.listaEtiquetas.get(i).getDescripcion());
+        }
+    }
+    public boolean verificarNombre(String nombreEtiqueta){
+        for(int i = 0;i < this.listaEtiquetas.size();i++){
+            if(this.listaEtiquetas.get(i).getEtiqueta().equals(nombreEtiqueta)){
+                return true;
+            }
+        }
+        return false;
+    }
+    public Etiqueta buscador(String nombreEtiqueta){
+        for(int i = 0;i < listaEtiquetas.size();i++){
+            if(this.listaEtiquetas.get(i).getEtiqueta().equals(nombreEtiqueta)){
+                return this.listaEtiquetas.get(i);
+            }
+        }
+        return new Etiqueta(nombreEtiqueta,"error");
+    }
 }

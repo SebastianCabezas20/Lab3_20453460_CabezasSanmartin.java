@@ -21,15 +21,15 @@ public class Pregunta {
     private boolean estado;
     private ListaRecompensas listaRecompensa;
 
-    public Pregunta(String titulo, String contenido, String fecha, String autor) {  
+    public Pregunta(String titulo, String contenido,ListaEtiquetas etiquetas,String autor) {  
         cantidadPreguntas++;
         this.ID = cantidadPreguntas;
         this.listaRespuestas = new ListaRespuestas();
-        this.listaEtiquetas = new ListaEtiquetas();
+        this.listaEtiquetas = etiquetas;
         this.listaRecompensa = new ListaRecompensas();
         this.titulo = titulo;
         this.contenido = contenido;
-        this.fecha = fecha;
+        this.fecha = "fecha";
         this.autor = autor;
         this.estado = false;
         

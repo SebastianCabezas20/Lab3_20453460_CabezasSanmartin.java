@@ -71,4 +71,8 @@ public class Stack {
             return false;
         }
     }
+    public void ask(String titulo,String contenido,ListaEtiquetas etiquetas){
+        Pregunta pregunta = new Pregunta(titulo,contenido,etiquetas,this.listaUsuarios.getUsuario(this.indexActivo).getUsername());
+        this.listaPreguntas.agregarPregunta(pregunta);
+    }
 }
