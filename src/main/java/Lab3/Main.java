@@ -76,6 +76,7 @@ public class Main {
                     agregarPregunta(stack);
                     break;
                 case 2:
+                    agregarRespuesta(stack);
                     break;
                 case 3:
                     break;
@@ -160,6 +161,31 @@ public class Main {
             else{
                 System.out.println("OPCION INGRESADA NO VALIDA.");
             }
+        }
+    }
+
+    private static void agregarRespuesta(Stack stack) {
+        if(stack.getListaPreguntas().cantidadPreguntas() > 0){
+            int salida = 0,ID;
+            String contenido;
+            Scanner IDPregunta = new Scanner(System.in);
+            Scanner informacion = new Scanner(System.in);
+            stack.getListaPreguntas().imprimir();
+            while(salida == 0){
+                System.out.println("Ingrese ID de pregunta a responder:");
+                ID = IDPregunta.nextInt();
+                if(ID >= stack.getListaPreguntas().cantidadPreguntas() && ID >= 0){
+                    System.out.println("EL ID INGRESADO NO EXISTE");
+                }
+                else{
+                    System.out.println("Ingrese el contenido de la pregunta: ");
+                    contenido = informacion.nextLine();
+                    stack.answer(ID,contenido);
+                }
+            }
+        }
+        else{
+            System.out.println("NO EXISTEN PREGUNTAS");
         }
     }
     

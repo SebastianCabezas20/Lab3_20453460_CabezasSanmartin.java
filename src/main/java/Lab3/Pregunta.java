@@ -22,8 +22,8 @@ public class Pregunta {
     private ListaRecompensas listaRecompensa;
 
     public Pregunta(String titulo, String contenido,ListaEtiquetas etiquetas,String autor) {  
-        cantidadPreguntas++;
         this.ID = cantidadPreguntas;
+        cantidadPreguntas++;
         this.listaRespuestas = new ListaRespuestas();
         this.listaEtiquetas = etiquetas;
         this.listaRecompensa = new ListaRecompensas();
@@ -31,9 +31,25 @@ public class Pregunta {
         this.contenido = contenido;
         this.fecha = "fecha";
         this.autor = autor;
-        this.estado = false;
-        
+        this.estado = false;  
     }
+
+    public int getID() {
+        return ID;
+    }
+
+    public String getContenido() {
+        return contenido;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public ListaRespuestas getListaRespuestas() {
+        return listaRespuestas;
+    }
+    
     
     
 }

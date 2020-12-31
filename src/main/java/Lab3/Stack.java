@@ -75,4 +75,8 @@ public class Stack {
         Pregunta pregunta = new Pregunta(titulo,contenido,etiquetas,this.listaUsuarios.getUsuario(this.indexActivo).getUsername());
         this.listaPreguntas.agregarPregunta(pregunta);
     }
+    public void answer(int ID,String contenido){
+        Respuesta respuesta = new Respuesta(contenido,this.listaUsuarios.getUsuario(this.indexActivo).getUsername(),ID);
+        this.listaPreguntas.getPregunta(ID).getListaRespuestas().agregarRespuesta(respuesta);
+    }
 }

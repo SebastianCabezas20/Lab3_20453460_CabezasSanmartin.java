@@ -17,12 +17,12 @@ public class Respuesta {
     private String fecha;
     private int preguntaRespondida;
 
-    public Respuesta(int ID, String contenido, String autor, String fecha, int preguntaRespondida) {
+    public Respuesta(String contenido, String autor, int preguntaRespondida) {
+        this.ID = cantidadRespuestas;
         cantidadRespuestas++;
-        this.ID = ID;
         this.contenido = contenido;
         this.autor = autor;
-        this.fecha = fecha;
+        this.fecha = "FECHA";
         this.preguntaRespondida = preguntaRespondida;
     }
 }
