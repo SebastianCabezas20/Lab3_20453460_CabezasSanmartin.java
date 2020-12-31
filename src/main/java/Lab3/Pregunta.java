@@ -10,7 +10,7 @@ package Lab3;
  * @author Sebastián
  */
 public class Pregunta {
-    private static int cantidadPreguntas = 0;
+    private static int cantidadPreguntas = 1;
     private int ID;
     private ListaRespuestas listaRespuestas;
     private ListaEtiquetas listaEtiquetas;
@@ -49,6 +49,19 @@ public class Pregunta {
     public ListaRespuestas getListaRespuestas() {
         return listaRespuestas;
     }
+
+    public boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
+    public ListaRecompensas getListaRecompensa() {
+        return listaRecompensa;
+    }
+    
     
     
     

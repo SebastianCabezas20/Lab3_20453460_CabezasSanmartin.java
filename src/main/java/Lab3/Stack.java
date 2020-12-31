@@ -77,6 +77,22 @@ public class Stack {
     }
     public void answer(int ID,String contenido){
         Respuesta respuesta = new Respuesta(contenido,this.listaUsuarios.getUsuario(this.indexActivo).getUsername(),ID);
-        this.listaPreguntas.getPregunta(ID).getListaRespuestas().agregarRespuesta(respuesta);
+        this.listaPreguntas.getPregunta(ID).getListaRespuestas().agregarRespuesta(respuesta);//get pregunta
     }
+    public void reward(int ID, int recompensa){
+        if(ID >= this.listaPreguntas.cantidadPreguntas() && ID >= 0 && this.listaPreguntas.verificarEstado(ID)){//verificar estado
+            System.out.println("EL ID INGRESADO NO VALIDO");
+        }
+        else{
+           if(recompensa <= this.listaUsuarios.getUsuario(this.indexActivo).getReputacionRelativa()){
+               Recompensa nuevaRecompensa = new Recompensa(recompensa,this.indexActivo);
+               this.getListaUsuarios().getUsuario(this.indexActivo).restarReputacionRelativa(recompensa);
+               this.listaPreguntas.getPregunta(ID).getListaRecompensa().agregarRecompensa(nuevaRecompensa);
+           }
+           else{
+               System.out.println("NO POSEE LA SUFICIENTE REPUTACION");
+           }
+        }     
+    }
+    
 }

@@ -10,10 +10,10 @@ package Lab3;
  * @author Sebastián
  */
 public class Recompensa {
-    int reputacion;
-    String usuarioRecompensa;
+    private int reputacion;
+    private int usuarioRecompensa;
 
-    public Recompensa(int reputacion, String usuarioRecompensa) {
+    public Recompensa(int reputacion, int usuarioRecompensa) {
         this.reputacion = reputacion;
         this.usuarioRecompensa = usuarioRecompensa;
     }

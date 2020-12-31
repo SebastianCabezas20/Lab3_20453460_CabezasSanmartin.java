@@ -28,8 +28,20 @@ public class ListaPreguntas {
     public int cantidadPreguntas(){
         return this.preguntas.size();
     }
-    public Pregunta getPregunta(int index){
-        return this.preguntas.get(index);
+    public Pregunta getPregunta(int ID){
+        for(int i = 0;i < this.preguntas.size(); i++){
+            if(this.preguntas.get(i).getID() == ID){
+                return this.preguntas.get(i);
+            }
+        }
+        return null;
     }
-    
+    public boolean verificarEstado(int ID){
+        for(int i = 0;i < this.preguntas.size(); i++){
+            if(this.preguntas.get(i).getID() == ID){
+                return !this.preguntas.get(i).getEstado();
+            }
+        }
+        return false;
+    }
 }

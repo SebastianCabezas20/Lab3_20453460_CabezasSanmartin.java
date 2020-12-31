@@ -79,6 +79,7 @@ public class Main {
                     agregarRespuesta(stack);
                     break;
                 case 3:
+                    agregarRecompensa(stack);
                     break;
                 case 4:
                     break;
@@ -166,28 +167,41 @@ public class Main {
 
     private static void agregarRespuesta(Stack stack) {
         if(stack.getListaPreguntas().cantidadPreguntas() > 0){
-            int salida = 0,ID;
+            int ID;
             String contenido;
             Scanner IDPregunta = new Scanner(System.in);
             Scanner informacion = new Scanner(System.in);
             stack.getListaPreguntas().imprimir();
-            while(salida == 0){
-                System.out.println("Ingrese ID de pregunta a responder:");
-                ID = IDPregunta.nextInt();
-                if(ID >= stack.getListaPreguntas().cantidadPreguntas() && ID >= 0){
-                    System.out.println("EL ID INGRESADO NO EXISTE");
-                }
-                else{
-                    System.out.println("Ingrese el contenido de la pregunta: ");
-                    contenido = informacion.nextLine();
-                    stack.answer(ID,contenido);
-                }
+           
+            System.out.println("Ingrese ID de pregunta a responder:");
+            ID = IDPregunta.nextInt();
+            if(ID >= stack.getListaPreguntas().cantidadPreguntas() && ID >= 0){
+                System.out.println("EL ID INGRESADO NO EXISTE");
             }
+            else{
+                System.out.println("Ingrese el contenido de la pregunta: ");
+                contenido = informacion.nextLine();
+                stack.answer(ID,contenido);
+            }     
         }
         else{
             System.out.println("NO EXISTEN PREGUNTAS");
         }
     }
-    
-    
+    private static void agregarRecompensa(Stack stack){
+        if(stack.getListaPreguntas().cantidadPreguntas() > 0){
+            int ID,recompensa;
+            Scanner entrada = new Scanner(System.in);
+            stack.getListaPreguntas().imprimir();
+           
+            System.out.println("Ingrese ID de pregunta a ofrecer recompensa:");
+            ID = entrada.nextInt();
+            System.out.println("Ingrese recompensa a ofrecer:");
+            recompensa = entrada.nextInt();
+            stack.reward(ID,recompensa);
+        }
+        else{
+            System.out.println("NO EXISTEN PREGUNTAS");
+        }
+    }    
 }

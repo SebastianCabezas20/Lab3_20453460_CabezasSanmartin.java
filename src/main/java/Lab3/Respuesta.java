@@ -10,7 +10,7 @@ package Lab3;
  * @author Sebastián
  */
 public class Respuesta {
-    private static int cantidadRespuestas = 0;
+    private static int cantidadRespuestas = 1;
     private int ID;
     private String contenido;
     private String autor;
