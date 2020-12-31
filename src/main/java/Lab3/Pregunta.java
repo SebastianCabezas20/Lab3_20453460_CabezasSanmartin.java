@@ -5,37 +5,33 @@
  */
 package Lab3;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author Sebastián
  */
 public class Pregunta {
-    static int cantidadPreguntas = 0;
-    int ID;
-    ArrayList<Integer> listaRespuestas;//<int>
-    //Etiquetas etiquetas;
-    String titulo;
-    String contenido;
-    String fecha;
-    String autor;
-    boolean estado;
-    int recompensa;
-    String usuarioRecompensa;
+    private static int cantidadPreguntas = 0;
+    private int ID;
+    private ListaRespuestas listaRespuestas;
+    private ListaEtiquetas listaEtiquetas;
+    private String titulo;
+    private String contenido;
+    private String fecha;
+    private String autor;
+    private boolean estado;
+    private ListaRecompensas listaRecompensa;
 
-    public Pregunta(String titulo, String contenido, String fecha, String autor) {
-        
+    public Pregunta(String titulo, String contenido, String fecha, String autor) {  
         cantidadPreguntas++;
         this.ID = cantidadPreguntas;
-        this.listaRespuestas = new ArrayList<>();
+        this.listaRespuestas = new ListaRespuestas();
+        this.listaEtiquetas = new ListaEtiquetas();
+        this.listaRecompensa = new ListaRecompensas();
         this.titulo = titulo;
         this.contenido = contenido;
         this.fecha = fecha;
         this.autor = autor;
         this.estado = false;
-        this.recompensa = 0;
-        this.usuarioRecompensa = null;
         
     }
     

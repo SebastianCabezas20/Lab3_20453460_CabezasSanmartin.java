@@ -11,15 +11,14 @@ import java.util.ArrayList;
  *
  * @author Sebastián
  */
-public class ListaPreguntas {
-    ArrayList<Pregunta> preguntas;
+public class ListaRecompensas {
+    ArrayList<Recompensa> listaRempensa;
 
-    public ListaPreguntas() {
-        this.preguntas = new ArrayList<>();
+    public ListaRecompensas() {
+        this.listaRempensa = new ArrayList<>();
     }
-    public void agregarPregunta(Pregunta pregunta){
-        this.preguntas.add(pregunta);
+    public void agregarRecompensa(Recompensa recompensa){
+        this.listaRempensa.add(recompensa);
     }
-    
     
 }
