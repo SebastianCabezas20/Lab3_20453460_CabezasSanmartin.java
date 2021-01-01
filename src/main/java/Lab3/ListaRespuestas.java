@@ -20,7 +20,16 @@ public class ListaRespuestas {
     public void agregarRespuesta(Respuesta respuesta){
         this.listaRespuesta.add(respuesta);
     }
-    
-    
+    public int cantidadRespuestas(){
+        return this.listaRespuesta.size();
+    }
+    public Respuesta getRespuesta(int ID){
+        for(int i = 0; i < this.listaRespuesta.size();i++){
+            if(this.listaRespuesta.get(i).getID() == ID){
+                return this.listaRespuesta.get(i);
+            }
+        }
+        return null;
+    }
 }
 

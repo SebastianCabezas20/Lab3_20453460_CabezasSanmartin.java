@@ -12,6 +12,7 @@ import java.util.ArrayList;
  * @author Sebastián
  */
 public class ListaUsuarios {
+    static int cantidadUsuarios = 0;
     ArrayList<Usuario> ListaUsuarios;
 
     public ListaUsuarios() {
@@ -39,5 +40,13 @@ public class ListaUsuarios {
            } 
         }
         return -1;
+    }
+    public Usuario getUsuarioUsername(String username){
+        for(int i= 0;i < this.ListaUsuarios.size();i++){
+            if(this.ListaUsuarios.get(i).getUsername().equals(username)){
+                return this.ListaUsuarios.get(i);
+            }
+        }
+        return null;
     }
 }

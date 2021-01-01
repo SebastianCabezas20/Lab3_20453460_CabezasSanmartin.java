@@ -17,5 +17,13 @@ public class Recompensa {
         this.reputacion = reputacion;
         this.usuarioRecompensa = usuarioRecompensa;
     }
+
+    public int getReputacion() {
+        return reputacion;
+    }
+
+    public int getUsuarioRecompensa() {
+        return usuarioRecompensa;
+    }
     
 }

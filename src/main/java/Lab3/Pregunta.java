@@ -18,7 +18,7 @@ public class Pregunta {
     private String contenido;
     private String fecha;
     private String autor;
-    private boolean estado;
+    private boolean estado;//Si existen preguntas aceptadas
     private ListaRecompensas listaRecompensa;
 
     public Pregunta(String titulo, String contenido,ListaEtiquetas etiquetas,String autor) {  
@@ -61,7 +61,7 @@ public class Pregunta {
     public ListaRecompensas getListaRecompensa() {
         return listaRecompensa;
     }
-    
+
     
     
     

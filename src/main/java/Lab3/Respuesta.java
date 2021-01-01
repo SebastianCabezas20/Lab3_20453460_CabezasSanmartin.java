@@ -16,6 +16,7 @@ public class Respuesta {
     private String autor;
     private String fecha;
     private int preguntaRespondida;
+    private boolean estado = false;//No aceptado
 
     public Respuesta(String contenido, String autor, int preguntaRespondida) {
         this.ID = cantidadRespuestas;
@@ -25,4 +26,25 @@ public class Respuesta {
         this.fecha = "FECHA";
         this.preguntaRespondida = preguntaRespondida;
     }
+
+    public int getID() {
+        return ID;
+    }
+
+    public boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
+    public int getPreguntaRespondida() {
+        return preguntaRespondida;
+    }    
+
+    public String getAutor() {
+        return autor;
+    }
+    
 }

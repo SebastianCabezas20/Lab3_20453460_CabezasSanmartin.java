@@ -20,5 +20,11 @@ public class ListaRecompensas {
     public void agregarRecompensa(Recompensa recompensa){
         this.listaRempensa.add(recompensa);
     }
+    public int cantidadRecompensas(){
+        return this.listaRempensa.size();
+    }
+    public Recompensa getRecompensa(int index){
+        return this.listaRempensa.get(index);
+    }
     
 }

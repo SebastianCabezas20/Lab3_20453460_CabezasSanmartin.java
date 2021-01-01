@@ -22,7 +22,9 @@ public class ListaPreguntas {
     }
     public void imprimir(){
         for(int i = 0; i < this.preguntas.size();i++){
-            System.out.println(this.preguntas.get(i).getID()+this.preguntas.get(i).getID());//representacion de la pregunta
+            if(!this.preguntas.get(i).getEstado()){
+                System.out.println(this.preguntas.get(i).getID()+this.preguntas.get(i).getContenido());//representacion de la pregunta
+            }
         }
     }
     public int cantidadPreguntas(){
@@ -36,12 +38,29 @@ public class ListaPreguntas {
         }
         return null;
     }
-    public boolean verificarEstado(int ID){
-        for(int i = 0;i < this.preguntas.size(); i++){
-            if(this.preguntas.get(i).getID() == ID){
-                return !this.preguntas.get(i).getEstado();
+    public void filtrarPreguntas(String username){
+        for(int i = 0; i < this.preguntas.size();i++){
+            if(this.preguntas.get(i).getAutor().equals(username)){//Caso que la pregunta se del usuario
+                System.out.println(this.preguntas.get(i).getContenido());
+                int respuestas = 0;
+                for(int j = 0; j < this.preguntas.get(i).getListaRespuestas().cantidadRespuestas();j++){
+                    if(!this.preguntas.get(i).getListaRespuestas().getRespuesta(j).getEstado()){//Caso que la respuesta no haya sido respondida
+                        System.out.println(this.preguntas.get(j).getListaRespuestas().getRespuesta(j).getID());
+                        respuestas++;
+                    }
+                }
+                if(respuestas == 0){
+                    System.out.println("NO TIENE RESPUESTAS PENDIENTES");
+                }
             }
         }
-        return false;
+    }
+    public boolean perteneceRespuesta(int IDPregunta,int IDRespuesta){
+        if(this.getPregunta(IDPregunta).getListaRespuestas().getRespuesta(IDPregunta) == null){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }

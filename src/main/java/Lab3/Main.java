@@ -82,6 +82,7 @@ public class Main {
                     agregarRecompensa(stack);
                     break;
                 case 4:
+                    aceptarRespuesta(stack);
                     break;
                 case 5:
                     System.out.println("Ingrese username: ");
@@ -199,9 +200,21 @@ public class Main {
             System.out.println("Ingrese recompensa a ofrecer:");
             recompensa = entrada.nextInt();
             stack.reward(ID,recompensa);
-        }
+            }
         else{
             System.out.println("NO EXISTEN PREGUNTAS");
         }
     }    
+
+    private static void aceptarRespuesta(Stack stack) {
+        int IDPregunta,IDRespuesta;
+        //Imprimir preguntas
+        stack.getListaPreguntas().filtrarPreguntas(stack.getListaUsuarios().getUsuario(stack.getIndexActivo()).getUsername());
+        Scanner entrada = new Scanner(System.in);
+        System.out.println("Ingrese el ID de la pregunta que contiene la respuesta: ");
+        IDPregunta = entrada.nextInt();
+        System.out.println("Ingrese ID de respuesta:");
+        IDRespuesta = entrada.nextInt();
+        stack.accept(IDPregunta,IDRespuesta);
+    }
 }

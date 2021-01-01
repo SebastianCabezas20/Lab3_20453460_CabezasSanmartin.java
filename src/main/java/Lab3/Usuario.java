@@ -60,4 +60,7 @@ public class Usuario {
     public void restarReputacionAbsoluta (int Reputacion){
         this.reputacion = this.reputacion - Reputacion;
     }
+    public void sumarReputacionAbsoluta (int Reputacion){
+        this.reputacion = this.reputacion + Reputacion;
+    }
 }

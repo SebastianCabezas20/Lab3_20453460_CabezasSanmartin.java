@@ -10,6 +10,7 @@ package Lab3;
  * @author Sebastián
  */
 public class Stack {
+    int cantidadTotalRespuestas;
     private ListaUsuarios listaUsuarios;
     private ListaPreguntas listaPreguntas;
     private ListaEtiquetas listaEtiquetas;
@@ -20,6 +21,7 @@ public class Stack {
         this.listaPreguntas = new ListaPreguntas();
         this.listaEtiquetas = new ListaEtiquetas();
         this.indexActivo = -1;
+        this.cantidadTotalRespuestas = 0;
     }
 
     public int getIndexActivo() {
@@ -77,10 +79,11 @@ public class Stack {
     }
     public void answer(int ID,String contenido){
         Respuesta respuesta = new Respuesta(contenido,this.listaUsuarios.getUsuario(this.indexActivo).getUsername(),ID);
-        this.listaPreguntas.getPregunta(ID).getListaRespuestas().agregarRespuesta(respuesta);//get pregunta
+        this.listaPreguntas.getPregunta(ID).getListaRespuestas().agregarRespuesta(respuesta);
+        this.cantidadTotalRespuestas = this.cantidadTotalRespuestas +1;
     }
     public void reward(int ID, int recompensa){
-        if(ID >= this.listaPreguntas.cantidadPreguntas() && ID >= 0 && this.listaPreguntas.verificarEstado(ID)){//verificar estado
+        if(ID > this.listaPreguntas.cantidadPreguntas() || ID < 0 || this.listaPreguntas.getPregunta(ID).getEstado()){
             System.out.println("EL ID INGRESADO NO VALIDO");
         }
         else{
@@ -93,6 +96,37 @@ public class Stack {
                System.out.println("NO POSEE LA SUFICIENTE REPUTACION");
            }
         }     
+    }
+    public void accept(int IDPregunta,int IDRespuesta){
+        //Verificar que la pregunta contenga respuestas pendientes y verificar que la respuesta tenga el ID de la pregunta
+        if(IDPregunta > this.listaPreguntas.cantidadPreguntas() || IDPregunta < 0 ||
+                !this.listaPreguntas.getPregunta(IDPregunta).getAutor().equals(this.listaUsuarios.getUsuario(this.indexActivo).getUsername())){
+            System.out.println("ID DE PREGUNTA NO VALIDO");
+        }
+        ///error de que la elegida ya esta aceptada
+        else if(IDRespuesta < 0 || IDRespuesta > this.cantidadTotalRespuestas|| 
+                this.listaPreguntas.getPregunta(IDPregunta).getListaRespuestas().getRespuesta(IDRespuesta).getEstado() || this.listaPreguntas.perteneceRespuesta(IDPregunta, IDRespuesta) ){//verificar que exista la respuesta en la pregunta
+            System.out.println("ID RESPUESTA NO VALIDO");
+        }
+        else{
+            if(this.listaPreguntas.getPregunta(IDPregunta).getListaRecompensa().cantidadRecompensas() > 0 && !this.listaPreguntas.getPregunta(IDPregunta).getEstado()){//existe recompensa
+                int recompensaTotal = 0;
+                for(int i = 0; i < this.listaPreguntas.getPregunta(IDPregunta).getListaRecompensa().cantidadRecompensas();i++){
+                    int recompensaCobrada = this.listaPreguntas.getPregunta(IDPregunta).getListaRecompensa().getRecompensa(i).getReputacion();
+                    int indexOfrecido = this.listaPreguntas.getPregunta(IDPregunta).getListaRecompensa().getRecompensa(i).getUsuarioRecompensa();
+                    recompensaTotal = recompensaTotal + recompensaCobrada;
+                    this.listaUsuarios.getUsuario(indexOfrecido).restarReputacionAbsoluta(recompensaCobrada);
+                }
+                this.listaPreguntas.getPregunta(IDPregunta).setEstado(true);
+                this.listaPreguntas.getPregunta(IDPregunta).getListaRespuestas().getRespuesta(IDRespuesta).setEstado(true);
+                this.listaUsuarios.getUsuarioUsername(this.listaPreguntas.getPregunta(IDPregunta).getListaRespuestas()
+                        .getRespuesta(IDRespuesta).getAutor()).sumarReputacionAbsoluta(recompensaTotal);
+                
+            }
+            else{
+               this.listaPreguntas.getPregunta(IDPregunta).getListaRespuestas().getRespuesta(IDRespuesta).setEstado(true); 
+            }
+        }
     }
     
 }
