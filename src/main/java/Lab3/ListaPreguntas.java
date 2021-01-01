@@ -63,4 +63,54 @@ public class ListaPreguntas {
             return false;
         }
     }
+    public void filtrarSinUsername(String username){
+        for(int i = 0; i < this.preguntas.size();i++){
+            if(!this.preguntas.get(i).getAutor().equals(username)){//Caso que la pregunta se del usuario
+                System.out.println(this.preguntas.get(i).getContenido());
+                int respuestas = 0;
+                for(int j = 0; j < this.preguntas.get(i).getListaRespuestas().cantidadRespuestas();j++){
+                    if(!this.preguntas.get(i).getListaRespuestas().getRespuesta(j).getEstado()){//Caso que la respuesta no haya sido respondida
+                        System.out.println(this.preguntas.get(j).getListaRespuestas().getRespuesta(j).getIDGeneral());
+                        respuestas++;
+                    }
+                }
+                if(respuestas == 0){
+                    System.out.println("NO TIENE RESPUESTAS");
+                }
+            }
+        }
+    }
+    public boolean verificarIDGeneralPregunta(int ID){
+        for(int i = 0;i < this.preguntas.size(); i++){
+            if(this.preguntas.get(i).getIDGeneral() == ID){
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean verificarIDGeneralRespuesta(int ID){
+        for(int i = 0;i < this.preguntas.size(); i++){
+            if(this.preguntas.get(i).getListaRespuestas().verificarIDGeneral(ID)){
+                return true;
+            }
+        }
+        return false;
+    }
+    public Pregunta getPreguntaIDGeneral(int ID){
+        for(int i = 0; i < this.preguntas.size();i++){
+            if(this.preguntas.get(i).getIDGeneral() == ID){
+                return this.preguntas.get(i);
+            }
+        }
+        return null;
+    }
+    public Respuesta getRespuestaIDGeneral(int ID){
+        for(int i = 0;i < this.preguntas.size(); i++){
+            if(this.preguntas.get(i).getListaRespuestas().verificarIDGeneral(ID)){
+                return this.preguntas.get(i).getListaRespuestas().getRespuestaIDGeneral(ID);
+            }
+        }
+        return null;
+    }
+    
 }

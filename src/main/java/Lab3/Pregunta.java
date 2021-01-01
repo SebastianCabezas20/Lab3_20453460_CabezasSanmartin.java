@@ -11,6 +11,7 @@ package Lab3;
  */
 public class Pregunta {
     private static int cantidadPreguntas = 1;
+    private int IDGeneral;
     private int ID;
     private ListaRespuestas listaRespuestas;
     private ListaEtiquetas listaEtiquetas;
@@ -20,8 +21,13 @@ public class Pregunta {
     private String autor;
     private boolean estado;//Si existen preguntas aceptadas
     private ListaRecompensas listaRecompensa;
+    private int votosPositivos;
+    private int votosNegativos;
 
-    public Pregunta(String titulo, String contenido,ListaEtiquetas etiquetas,String autor) {  
+    public Pregunta(int IDGeneral,String titulo, String contenido,ListaEtiquetas etiquetas,String autor) {
+        this.votosPositivos = 0;
+        this.votosNegativos = 0;
+        this.IDGeneral = IDGeneral;
         this.ID = cantidadPreguntas;
         cantidadPreguntas++;
         this.listaRespuestas = new ListaRespuestas();
@@ -62,7 +68,24 @@ public class Pregunta {
         return listaRecompensa;
     }
 
-    
-    
+    public int getIDGeneral() {
+        return IDGeneral;
+    }
+
+    public int getVotosPositivos() {
+        return votosPositivos;
+    }
+
+    public int getVotosNegativos() {
+        return votosNegativos;
+    }
+    public void aumentarVoto(boolean opcion){
+        if(opcion){
+            this.votosPositivos++;
+        }
+        else{
+            this.votosNegativos++;
+        }
+    }
     
 }

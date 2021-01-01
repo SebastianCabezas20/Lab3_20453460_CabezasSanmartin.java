@@ -67,8 +67,9 @@ public class Main {
             System.out.println("2-Agregar respuesta");
             System.out.println("3-Ofrecer recompensa");
             System.out.println("4-Aceptar respuesta");
-            System.out.println("5-Cerrar sesion");
-            System.out.println("6-Cerrar programa");
+            System.out.println("5-Votar");
+            System.out.println("6-Cerrar sesion");
+            System.out.println("7-Cerrar programa");
             System.out.println("Ingrese opcion: ");
             opcion = entrada.nextInt();
             switch(opcion){
@@ -85,6 +86,9 @@ public class Main {
                     aceptarRespuesta(stack);
                     break;
                 case 5:
+                    votar(stack);
+                    break;
+                case 6:
                     System.out.println("Ingrese username: ");
                     username = informacion.nextLine();
                     System.out.println("Ingrese contraseña");
@@ -94,7 +98,7 @@ public class Main {
                         return 0;
                     }
                     break;
-                case 6:
+                case 7:
                     return 1;
                 default:
                     System.out.println("NO EXISTE OPCION ESCOGIDA.");
@@ -216,5 +220,25 @@ public class Main {
         System.out.println("Ingrese ID de respuesta:");
         IDRespuesta = entrada.nextInt();
         stack.accept(IDPregunta,IDRespuesta);
+    }
+
+    private static void votar(Stack stack) {
+        stack.getListaPreguntas().filtrarSinUsername(stack.getListaUsuarios().getUsuario(stack.getIndexActivo()).getUsername());
+        Scanner entrada = new Scanner(System.in);
+        System.out.println("Ingrese ID A votar: ");
+        int ID = entrada.nextInt();
+        System.out.println("Escoja una opcion de voto:");
+        System.out.println("1-Positivo");
+        System.out.println("2-Negativo");
+        int opcion = entrada.nextInt();
+        if(opcion == 1){
+            stack.vote(ID,true);
+        }
+        else if(opcion == 2){
+            stack.vote(ID,false);
+        }
+        else{
+        System.out.println("OPCION NO VALIDA");}
+        
     }
 }

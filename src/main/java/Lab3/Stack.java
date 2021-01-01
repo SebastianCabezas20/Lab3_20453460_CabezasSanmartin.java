@@ -10,6 +10,7 @@ package Lab3;
  * @author Sebastián
  */
 public class Stack {
+    int IDgeneral;
     int cantidadTotalRespuestas;
     private ListaUsuarios listaUsuarios;
     private ListaPreguntas listaPreguntas;
@@ -22,6 +23,7 @@ public class Stack {
         this.listaEtiquetas = new ListaEtiquetas();
         this.indexActivo = -1;
         this.cantidadTotalRespuestas = 0;
+        this.IDgeneral = 1;
     }
 
     public int getIndexActivo() {
@@ -74,13 +76,15 @@ public class Stack {
         }
     }
     public void ask(String titulo,String contenido,ListaEtiquetas etiquetas){
-        Pregunta pregunta = new Pregunta(titulo,contenido,etiquetas,this.listaUsuarios.getUsuario(this.indexActivo).getUsername());
+        Pregunta pregunta = new Pregunta(this.IDgeneral,titulo,contenido,etiquetas,this.listaUsuarios.getUsuario(this.indexActivo).getUsername());
         this.listaPreguntas.agregarPregunta(pregunta);
+        this.IDgeneral = this.IDgeneral +1;
     }
     public void answer(int ID,String contenido){
-        Respuesta respuesta = new Respuesta(contenido,this.listaUsuarios.getUsuario(this.indexActivo).getUsername(),ID);
+        Respuesta respuesta = new Respuesta(this.IDgeneral,contenido,this.listaUsuarios.getUsuario(this.indexActivo).getUsername(),ID);
         this.listaPreguntas.getPregunta(ID).getListaRespuestas().agregarRespuesta(respuesta);
         this.cantidadTotalRespuestas = this.cantidadTotalRespuestas +1;
+        this.IDgeneral = this.IDgeneral +1;
     }
     public void reward(int ID, int recompensa){
         if(ID > this.listaPreguntas.cantidadPreguntas() || ID < 0 || this.listaPreguntas.getPregunta(ID).getEstado()){
@@ -128,5 +132,12 @@ public class Stack {
             }
         }
     }
-    
+    public void vote(int ID,boolean opcion){
+        if(this.listaPreguntas.verificarIDGeneralPregunta(ID)){
+            this.getListaPreguntas().getPreguntaIDGeneral(ID).aumentarVoto(opcion);
+        }else if(this.listaPreguntas.verificarIDGeneralRespuesta(ID)){
+            this.listaPreguntas.getRespuestaIDGeneral(ID).aumentarVoto(opcion);
+        }
+        else{System.out.println("No existe ID");}
+    }
 }

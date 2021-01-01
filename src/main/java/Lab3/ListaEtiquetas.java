@@ -39,6 +39,6 @@ public class ListaEtiquetas {
                 return this.listaEtiquetas.get(i);
             }
         }
-        return new Etiqueta(nombreEtiqueta,"error");
+        return null;
     }
 }
