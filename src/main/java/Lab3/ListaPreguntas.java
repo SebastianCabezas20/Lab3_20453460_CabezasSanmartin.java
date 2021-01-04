@@ -20,17 +20,9 @@ public class ListaPreguntas {
     public void agregarPregunta(Pregunta pregunta){
         this.preguntas.add(pregunta);
     }
-    public void imprimir(){
-        for(int i = 0; i < this.preguntas.size();i++){
-            if(!this.preguntas.get(i).getEstado()){
-                System.out.println(this.preguntas.get(i).getID()+this.preguntas.get(i).getContenido());//representacion de la pregunta
-            }
-        }
-    }
     public int cantidadPreguntas(){
         return this.preguntas.size();
     }
-
 
     public boolean verificarIDPregunta(int ID){
         for(int i = 0;i < this.preguntas.size(); i++){

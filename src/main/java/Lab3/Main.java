@@ -178,9 +178,7 @@ public class Main {
             int ID;
             String contenido;
             Scanner IDPregunta = new Scanner(System.in);
-            Scanner informacion = new Scanner(System.in);
-            stack.getListaPreguntas().imprimir();
-           
+            Scanner informacion = new Scanner(System.in);           
             System.out.println("Ingrese ID de pregunta a responder:");
             ID = IDPregunta.nextInt();
             System.out.println("Ingrese el contenido de la respuesta: ");
@@ -194,9 +192,7 @@ public class Main {
     private static void agregarRecompensa(Stack stack){
         if(stack.getListaPreguntas().cantidadPreguntas() > 0){
             int ID,recompensa;
-            Scanner entrada = new Scanner(System.in);
-            stack.getListaPreguntas().imprimir();
-           
+            Scanner entrada = new Scanner(System.in);           
             System.out.println("Ingrese ID de pregunta a ofrecer recompensa:");
             ID = entrada.nextInt();
             System.out.println("Ingrese recompensa a ofrecer:");

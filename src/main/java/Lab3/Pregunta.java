@@ -5,6 +5,9 @@
  */
 package Lab3;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  *
  * @author Sebastián
@@ -14,7 +17,7 @@ public class Pregunta {
     private ListaEtiquetas listaEtiquetas;
     private String titulo;
     private String contenido;
-    private String fecha;
+    private Date fecha;
     private String autor;
     private boolean estado;//Si existen preguntas aceptadas
     private ListaRecompensas listaRecompensa;
@@ -29,7 +32,7 @@ public class Pregunta {
         this.listaRecompensa = new ListaRecompensas();
         this.titulo = titulo;
         this.contenido = contenido;
-        this.fecha = "fecha";
+        this.fecha = new Date();
         this.autor = autor;
         this.estado = false;  
     }
@@ -67,6 +70,14 @@ public class Pregunta {
     public int getVotosNegativos() {
         return votosNegativos;
     }
+    
+    public void imprimir(){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY");
+        System.out.println("ID:" + this.ID + "El usuario " + this.autor + "pregunta : \n" 
+        + this.getContenido() + "Votos " + "Dislike: " + this.votosNegativos + "Like "+ this.votosPositivos + "\n" 
+        + sdf.format(this.fecha)) ;
+    }
+   
     public void aumentarVoto(boolean opcion){
         if(opcion){
             this.votosPositivos++;

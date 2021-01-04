@@ -5,6 +5,9 @@
  */
 package Lab3;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  *
  * @author Sebastián
@@ -13,7 +16,7 @@ public class Respuesta {
     private int ID;
     private String contenido;
     private String autor;
-    private String fecha;
+    private Date fecha;
     private int preguntaRespondida;
     private boolean estado;//No aceptado
     private int votosPositivos;
@@ -26,8 +29,15 @@ public class Respuesta {
         this.contenido = contenido;
         this.estado = false;
         this.autor = autor;
-        this.fecha = "FECHA";
+        this.fecha = new Date();
         this.preguntaRespondida = preguntaRespondida;
+    }
+    
+    public void imprimirRespuesta(){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY");
+        System.out.println("ID" + this.ID + this.autor+ "contesto: \n"
+        + this.contenido+ "Votos" + "Dislike: " + this.votosNegativos + "Like: " + this.votosPositivos + "\n " 
+        + sdf.format(this.fecha) );
     }
 
     public int getID() {
