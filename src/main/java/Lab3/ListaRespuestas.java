@@ -31,21 +31,13 @@ public class ListaRespuestas {
         }
         return null;
     }
-    public boolean verificarIDGeneral(int ID){
+    public boolean verificarID(int ID){
         for(int i = 0; i < this.listaRespuesta.size();i++){
-            if(this.listaRespuesta.get(i).getIDGeneral() == ID){
+            if(this.listaRespuesta.get(i).getID() == ID){
                 return true;
             }
         }
         return false;
-    }
-    public Respuesta getRespuestaIDGeneral(int ID){
-        for(int i = 0; i < this.listaRespuesta.size();i++){
-            if(this.listaRespuesta.get(i).getIDGeneral() == ID){
-                return this.listaRespuesta.get(i);
-            }
-        }
-        return null;
     }
 }
 

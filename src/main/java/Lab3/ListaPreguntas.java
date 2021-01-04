@@ -30,87 +30,31 @@ public class ListaPreguntas {
     public int cantidadPreguntas(){
         return this.preguntas.size();
     }
-    public Pregunta getPregunta(int ID){
+
+
+    public boolean verificarIDPregunta(int ID){
         for(int i = 0;i < this.preguntas.size(); i++){
+            if(this.preguntas.get(i).getID() == ID){
+                return true;
+            }
+        }
+        return false;
+    }
+   public boolean verificarUsername(int ID, String username){
+       if(this.getPregunta(ID).getAutor().equals(username)){
+           return true;
+       }
+       return false;
+   }
+   
+    public Pregunta getPregunta(int ID){
+        for(int i = 0; i < this.preguntas.size();i++){
             if(this.preguntas.get(i).getID() == ID){
                 return this.preguntas.get(i);
             }
         }
         return null;
     }
-    public void filtrarPreguntas(String username){
-        for(int i = 0; i < this.preguntas.size();i++){
-            if(this.preguntas.get(i).getAutor().equals(username)){//Caso que la pregunta se del usuario
-                System.out.println(this.preguntas.get(i).getContenido());
-                int respuestas = 0;
-                for(int j = 0; j < this.preguntas.get(i).getListaRespuestas().cantidadRespuestas();j++){
-                    if(!this.preguntas.get(i).getListaRespuestas().getRespuesta(j).getEstado()){//Caso que la respuesta no haya sido respondida
-                        System.out.println(this.preguntas.get(j).getListaRespuestas().getRespuesta(j).getID());
-                        respuestas++;
-                    }
-                }
-                if(respuestas == 0){
-                    System.out.println("NO TIENE RESPUESTAS PENDIENTES");
-                }
-            }
-        }
-    }
-    public boolean perteneceRespuesta(int IDPregunta,int IDRespuesta){
-        if(this.getPregunta(IDPregunta).getListaRespuestas().getRespuesta(IDPregunta) == null){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-    public void filtrarSinUsername(String username){
-        for(int i = 0; i < this.preguntas.size();i++){
-            if(!this.preguntas.get(i).getAutor().equals(username)){//Caso que la pregunta se del usuario
-                System.out.println(this.preguntas.get(i).getContenido());
-                int respuestas = 0;
-                for(int j = 0; j < this.preguntas.get(i).getListaRespuestas().cantidadRespuestas();j++){
-                    if(!this.preguntas.get(i).getListaRespuestas().getRespuesta(j).getEstado()){//Caso que la respuesta no haya sido respondida
-                        System.out.println(this.preguntas.get(j).getListaRespuestas().getRespuesta(j).getIDGeneral());
-                        respuestas++;
-                    }
-                }
-                if(respuestas == 0){
-                    System.out.println("NO TIENE RESPUESTAS");
-                }
-            }
-        }
-    }
-    public boolean verificarIDGeneralPregunta(int ID){
-        for(int i = 0;i < this.preguntas.size(); i++){
-            if(this.preguntas.get(i).getIDGeneral() == ID){
-                return true;
-            }
-        }
-        return false;
-    }
-    public boolean verificarIDGeneralRespuesta(int ID){
-        for(int i = 0;i < this.preguntas.size(); i++){
-            if(this.preguntas.get(i).getListaRespuestas().verificarIDGeneral(ID)){
-                return true;
-            }
-        }
-        return false;
-    }
-    public Pregunta getPreguntaIDGeneral(int ID){
-        for(int i = 0; i < this.preguntas.size();i++){
-            if(this.preguntas.get(i).getIDGeneral() == ID){
-                return this.preguntas.get(i);
-            }
-        }
-        return null;
-    }
-    public Respuesta getRespuestaIDGeneral(int ID){
-        for(int i = 0;i < this.preguntas.size(); i++){
-            if(this.preguntas.get(i).getListaRespuestas().verificarIDGeneral(ID)){
-                return this.preguntas.get(i).getListaRespuestas().getRespuestaIDGeneral(ID);
-            }
-        }
-        return null;
-    }
+ 
     
 }

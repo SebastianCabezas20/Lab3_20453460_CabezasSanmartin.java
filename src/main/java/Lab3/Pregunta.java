@@ -10,8 +10,6 @@ package Lab3;
  * @author Sebastián
  */
 public class Pregunta {
-    private static int cantidadPreguntas = 1;
-    private int IDGeneral;
     private int ID;
     private ListaRespuestas listaRespuestas;
     private ListaEtiquetas listaEtiquetas;
@@ -24,12 +22,10 @@ public class Pregunta {
     private int votosPositivos;
     private int votosNegativos;
 
-    public Pregunta(int IDGeneral,String titulo, String contenido,ListaEtiquetas etiquetas,String autor) {
+    public Pregunta(int ID,String titulo, String contenido,ListaEtiquetas etiquetas,String autor) {
         this.votosPositivos = 0;
         this.votosNegativos = 0;
-        this.IDGeneral = IDGeneral;
-        this.ID = cantidadPreguntas;
-        cantidadPreguntas++;
+        this.ID = ID;
         this.listaRespuestas = new ListaRespuestas();
         this.listaEtiquetas = etiquetas;
         this.listaRecompensa = new ListaRecompensas();
@@ -40,9 +36,7 @@ public class Pregunta {
         this.estado = false;  
     }
 
-    public int getID() {
-        return ID;
-    }
+
 
     public String getContenido() {
         return contenido;
@@ -68,8 +62,8 @@ public class Pregunta {
         return listaRecompensa;
     }
 
-    public int getIDGeneral() {
-        return IDGeneral;
+    public int getID() {
+        return ID;
     }
 
     public int getVotosPositivos() {

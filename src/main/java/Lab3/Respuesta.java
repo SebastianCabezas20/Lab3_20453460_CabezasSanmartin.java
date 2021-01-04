@@ -10,8 +10,6 @@ package Lab3;
  * @author Sebastián
  */
 public class Respuesta {
-    private int IDGeneral;
-    private static int cantidadRespuestas = 1;
     private int ID;
     private String contenido;
     private String autor;
@@ -24,9 +22,7 @@ public class Respuesta {
     public Respuesta(int IDGeneral,String contenido, String autor, int preguntaRespondida) {
         this.votosPositivos = 0;
         this.votosNegativos = 0;
-        this.IDGeneral = IDGeneral;
-        this.ID = cantidadRespuestas;
-        cantidadRespuestas++;
+        this.ID = IDGeneral;
         this.contenido = contenido;
         this.autor = autor;
         this.fecha = "FECHA";
@@ -51,10 +47,6 @@ public class Respuesta {
 
     public String getAutor() {
         return autor;
-    }
-
-    public int getIDGeneral() {
-        return IDGeneral;
     }
 
     public int getVotosPositivos() {

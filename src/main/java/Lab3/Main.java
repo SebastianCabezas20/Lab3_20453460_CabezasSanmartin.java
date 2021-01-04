@@ -20,6 +20,7 @@ public class Main {
         Scanner option = new Scanner(System.in);
         Scanner informacion = new Scanner(System.in);
         Stack stack = new Stack();
+        cargarStack(stack);
         ////////////////////////////////////////////////////////
         while(salir == 0){
             System.out.println("******SISTEMA DE PREGUNTAS Y RESPUESTAS******");
@@ -34,7 +35,7 @@ public class Main {
                     username = informacion.nextLine();
                     System.out.println("Ingrese contraseña");
                     pass = informacion.nextLine();
-                    stack.Registrar(username, pass);
+                    
                     break;
                 case 2:
                     System.out.println("Ingrese username: ");
@@ -141,21 +142,23 @@ public class Main {
                     else{
                         System.out.println("EL NOMBRE INGRESADO NO CORRESPONDE A UNA ETIQUETA");
                     }
-                    while(salidaEtiqueta == 0)
-                    System.out.println("Desea agregar otra etiqueta?");
-                    System.out.println("1-SI");
-                    System.out.println("2-NO");
-                    System.out.println("Ingrese opcion: ");
-                    opcion = option.nextInt();
-                    if(opcion == 1){
-                        salidaEtiqueta = 1;
-                    }
-                    else if(opcion == 2){
-                        salidaEtiqueta = 1;
-                        salida = 1;
-                    }
-                    else{
-                        System.out.println("OPCION NO VALIDA");
+                    salidaEtiqueta = 0;
+                    while(salidaEtiqueta == 0){
+                        System.out.println("Desea agregar otra etiqueta?");
+                        System.out.println("1-SI");
+                        System.out.println("2-NO");
+                        System.out.println("Ingrese opcion: ");
+                        int eleccion = option.nextInt();
+                        if(eleccion == 1){
+                            salidaEtiqueta = 1;
+                        }
+                        else if(eleccion == 2){
+                            salidaEtiqueta = 1;
+                            salida = 1;
+                        }
+                        else{
+                            System.out.println("OPCION NO VALIDA");
+                        }
                     }
                 }
                 stack.ask(titulo,contenido,etiquetas);    
@@ -180,14 +183,9 @@ public class Main {
            
             System.out.println("Ingrese ID de pregunta a responder:");
             ID = IDPregunta.nextInt();
-            if(ID >= stack.getListaPreguntas().cantidadPreguntas() && ID >= 0){
-                System.out.println("EL ID INGRESADO NO EXISTE");
-            }
-            else{
-                System.out.println("Ingrese el contenido de la pregunta: ");
-                contenido = informacion.nextLine();
-                stack.answer(ID,contenido);
-            }     
+            System.out.println("Ingrese el contenido de la respuesta: ");
+            contenido = informacion.nextLine();
+            stack.answer(ID,contenido);     
         }
         else{
             System.out.println("NO EXISTEN PREGUNTAS");
@@ -240,5 +238,29 @@ public class Main {
         else{
         System.out.println("OPCION NO VALIDA");}
         
+    }
+    private static void cargarStack(Stack stack){
+        //Cargar etiquetas
+        Etiqueta et1 = new Etiqueta("Java","Todas las descripciones de este lenguaje");
+        Etiqueta et2 = new Etiqueta("C++","Todas las descripciones de este lenguaje");
+        Etiqueta et3 = new Etiqueta("Python","Todas las descripciones de este lenguaje");
+        Etiqueta et4 = new Etiqueta("C","Todas las descripciones de este lenguaje");
+        Etiqueta et5 = new Etiqueta("Scheme","Todas las descripciones de este lenguaje");
+        stack.getListaEtiquetas().agregarEtiqueta(et1);
+        stack.getListaEtiquetas().agregarEtiqueta(et2);
+        stack.getListaEtiquetas().agregarEtiqueta(et3);
+        stack.getListaEtiquetas().agregarEtiqueta(et4);
+        stack.getListaEtiquetas().agregarEtiqueta(et5);
+        //cargar Usuarios
+        Usuario user1 = new Usuario("user1","pass1");
+        Usuario user2 = new Usuario("user2","pass2");
+        Usuario user3 = new Usuario("user3","pass3");
+        Usuario user4 = new Usuario("user4","pass4");
+        Usuario user5 = new Usuario("user5","pass5");
+        stack.getListaUsuarios().agregarUsuario(user1);
+        stack.getListaUsuarios().agregarUsuario(user2);
+        stack.getListaUsuarios().agregarUsuario(user3);
+        stack.getListaUsuarios().agregarUsuario(user4);
+        stack.getListaUsuarios().agregarUsuario(user5);      
     }
 }
