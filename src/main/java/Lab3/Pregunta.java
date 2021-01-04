@@ -11,7 +11,6 @@ package Lab3;
  */
 public class Pregunta {
     private int ID;
-    private ListaRespuestas listaRespuestas;
     private ListaEtiquetas listaEtiquetas;
     private String titulo;
     private String contenido;
@@ -26,7 +25,6 @@ public class Pregunta {
         this.votosPositivos = 0;
         this.votosNegativos = 0;
         this.ID = ID;
-        this.listaRespuestas = new ListaRespuestas();
         this.listaEtiquetas = etiquetas;
         this.listaRecompensa = new ListaRecompensas();
         this.titulo = titulo;
@@ -44,10 +42,6 @@ public class Pregunta {
 
     public String getAutor() {
         return autor;
-    }
-
-    public ListaRespuestas getListaRespuestas() {
-        return listaRespuestas;
     }
 
     public boolean getEstado() {

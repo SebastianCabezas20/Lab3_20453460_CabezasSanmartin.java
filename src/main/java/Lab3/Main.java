@@ -211,7 +211,7 @@ public class Main {
     private static void aceptarRespuesta(Stack stack) {
         int IDPregunta,IDRespuesta;
         //Imprimir preguntas
-        stack.getListaPreguntas().filtrarPreguntas(stack.getListaUsuarios().getUsuario(stack.getIndexActivo()).getUsername());
+        
         Scanner entrada = new Scanner(System.in);
         System.out.println("Ingrese el ID de la pregunta que contiene la respuesta: ");
         IDPregunta = entrada.nextInt();
@@ -221,7 +221,6 @@ public class Main {
     }
 
     private static void votar(Stack stack) {
-        stack.getListaPreguntas().filtrarSinUsername(stack.getListaUsuarios().getUsuario(stack.getIndexActivo()).getUsername());
         Scanner entrada = new Scanner(System.in);
         System.out.println("Ingrese ID A votar: ");
         int ID = entrada.nextInt();
@@ -241,26 +240,36 @@ public class Main {
     }
     private static void cargarStack(Stack stack){
         //Cargar etiquetas
-        Etiqueta et1 = new Etiqueta("Java","Todas las descripciones de este lenguaje");
-        Etiqueta et2 = new Etiqueta("C++","Todas las descripciones de este lenguaje");
-        Etiqueta et3 = new Etiqueta("Python","Todas las descripciones de este lenguaje");
-        Etiqueta et4 = new Etiqueta("C","Todas las descripciones de este lenguaje");
-        Etiqueta et5 = new Etiqueta("Scheme","Todas las descripciones de este lenguaje");
-        stack.getListaEtiquetas().agregarEtiqueta(et1);
-        stack.getListaEtiquetas().agregarEtiqueta(et2);
-        stack.getListaEtiquetas().agregarEtiqueta(et3);
-        stack.getListaEtiquetas().agregarEtiqueta(et4);
-        stack.getListaEtiquetas().agregarEtiqueta(et5);
+        stack.getListaEtiquetas().agregarEtiqueta(new Etiqueta("Java","Todas las descripciones de este lenguaje"));
+        stack.getListaEtiquetas().agregarEtiqueta(new Etiqueta("C++","Todas las descripciones de este lenguaje"));
+        stack.getListaEtiquetas().agregarEtiqueta(new Etiqueta("Python","Todas las descripciones de este lenguaje"));
+        stack.getListaEtiquetas().agregarEtiqueta(new Etiqueta("C","Todas las descripciones de este lenguaje"));
+        stack.getListaEtiquetas().agregarEtiqueta(new Etiqueta("Scheme","Todas las descripciones de este lenguaje"));
         //cargar Usuarios
-        Usuario user1 = new Usuario("user1","pass1");
-        Usuario user2 = new Usuario("user2","pass2");
-        Usuario user3 = new Usuario("user3","pass3");
-        Usuario user4 = new Usuario("user4","pass4");
-        Usuario user5 = new Usuario("user5","pass5");
-        stack.getListaUsuarios().agregarUsuario(user1);
-        stack.getListaUsuarios().agregarUsuario(user2);
-        stack.getListaUsuarios().agregarUsuario(user3);
-        stack.getListaUsuarios().agregarUsuario(user4);
-        stack.getListaUsuarios().agregarUsuario(user5);      
+        stack.Registrar("user1", "pass1");
+        stack.Registrar("user2", "pass2");
+        stack.Registrar("user3", "pass3");
+        stack.Registrar("user4", "pass4");
+        //cargar preguntas
+        ListaEtiquetas etiquetas = new ListaEtiquetas();
+        etiquetas.agregarEtiqueta(new Etiqueta("java","Todas las descripciones de este lenguaje"));
+        etiquetas.agregarEtiqueta(new Etiqueta("c","Todas las descripciones de este lenguaje"));
+        stack.login("user1", "pass1");
+        stack.ask("Pregunta 1","contenido pregunta 1?", etiquetas);
+        stack.login("user2", "pass2");
+        stack.ask("Pregunta 2","contenido pregunta 2?", etiquetas);
+        stack.login("user3", "pass3");
+        stack.ask("Pregunta 3","contenido pregunta 3?", etiquetas);
+        
+        //cargar respuestas
+        stack.login("user3", "pass3");
+        stack.answer(1, "respuesta la pregunta 1");
+        stack.login("user1", "pass1");
+        stack.answer(2, "respuesta la pregunta 2");
+        stack.login("user2", "pass2");
+        stack.answer(3, "respuesta la pregunta 3");
+        stack.logout("user2", "pass2");
+        
+        
     }
 }

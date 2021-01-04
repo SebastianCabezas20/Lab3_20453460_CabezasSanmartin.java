@@ -15,7 +15,7 @@ public class Respuesta {
     private String autor;
     private String fecha;
     private int preguntaRespondida;
-    private boolean estado = false;//No aceptado
+    private boolean estado;//No aceptado
     private int votosPositivos;
     private int votosNegativos;
 
@@ -24,6 +24,7 @@ public class Respuesta {
         this.votosNegativos = 0;
         this.ID = IDGeneral;
         this.contenido = contenido;
+        this.estado = false;
         this.autor = autor;
         this.fecha = "FECHA";
         this.preguntaRespondida = preguntaRespondida;
