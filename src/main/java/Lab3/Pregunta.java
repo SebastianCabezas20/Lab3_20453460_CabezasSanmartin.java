@@ -73,9 +73,9 @@ public class Pregunta {
     
     public void imprimir(){
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY");
-        System.out.println("ID:" + this.ID + "   El usuario " + this.autor + "pregunta : \n" 
-        + this.getContenido() + "         Votos " + "Dislike: " + this.votosNegativos + "   Like "+ this.votosPositivos + "\n" 
-        + sdf.format(this.fecha)) ;
+        System.out.println("\n          " + this.titulo + "\n" +" ID:" + this.ID + "   El usuario " + this.autor + "    pregunta : \n " 
+        + this.getContenido() + "         Votos   Dislike: " + this.votosNegativos + "   Like "+ this.votosPositivos + "\n " 
+        + sdf.format(this.fecha) + "  estado  " + this.estado) ;
     }
    
     public boolean aumentarVoto(boolean opcion){

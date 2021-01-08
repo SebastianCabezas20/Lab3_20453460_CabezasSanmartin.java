@@ -56,6 +56,6 @@ public class Usuario {
         this.reputacion = this.reputacion + Reputacion;
     }
     public String imprimir(){
-        return this.username + " reputacion: " + this.reputacion;
+        return this.username + " reputacion absoluta: " + this.reputacion + " reputacion relativa: " + this.reputacionRelativa;
     }
 }

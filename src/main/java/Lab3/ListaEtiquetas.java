@@ -22,7 +22,7 @@ public class ListaEtiquetas {
     }
     public void imprimir(){
         for(int i = 0;i < this.listaEtiquetas.size();i++){
-            System.out.println("-"+(i+1)+this.listaEtiquetas.get(i).getEtiqueta()+"descripcion"+this.listaEtiquetas.get(i).getDescripcion());
+            System.out.println("- "+(i+1)+this.listaEtiquetas.get(i).getEtiqueta()+"    descripcion"+this.listaEtiquetas.get(i).getDescripcion());
         }
     }
     public boolean verificarNombre(String nombreEtiqueta){

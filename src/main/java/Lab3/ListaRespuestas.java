@@ -60,7 +60,14 @@ public class ListaRespuestas {
             }
         }
         if(respuestas == 0){
-            System.out.println("NO TIENE RESPUESTAS PENDIENTES");
+            System.out.println("NO TIENE RESPUESTAS PARA VOTAR");
+        }
+    }
+    public void imprimirTotalRespuestas(int IDPregunta){
+        for(int i = 0; i < this.listaRespuesta.size();i++){
+            if(this.listaRespuesta.get(i).getPreguntaRespondida() == IDPregunta){
+                this.listaRespuesta.get(i).imprimirRespuesta();
+            }
         }
     }
 }

@@ -35,9 +35,9 @@ public class Respuesta {
     
     public void imprimirRespuesta(){
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY");
-        System.out.println("ID" + this.ID + this.autor+ "contesto: \n"
-        + this.contenido+ "Votos" + "Dislike: " + this.votosNegativos + "Like: " + this.votosPositivos + "\n " 
-        + sdf.format(this.fecha) );
+        System.out.println("   ID: " + this.ID + "  el usuario: " + this.autor+ "  contesto: \n"
+        +"   " + this.contenido+ "   Votos   Dislike: " + this.votosNegativos + "    Like: " + this.votosPositivos + "\n " 
+        +"  " + sdf.format(this.fecha)+ "  estado: " + this.getEstado());
     }
 
     public int getID() {

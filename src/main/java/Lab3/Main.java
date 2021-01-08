@@ -23,7 +23,7 @@ public class Main {
         cargarStack(stack);
         ////////////////////////////////////////////////////////
         while(salir == 0){
-            System.out.println("******SISTEMA DE PREGUNTAS Y RESPUESTAS******");
+            System.out.println("\n******SISTEMA DE PREGUNTAS Y RESPUESTAS******");
             System.out.println("1-Registrar");
             System.out.println("2-Iniciar sesion");
             System.out.println("3-Salir");
@@ -61,7 +61,7 @@ public class Main {
         Scanner entrada = new Scanner(System.in);
         Scanner informacion = new Scanner(System.in);
         while(salida == 0){
-            System.out.println("******SISTEMA DE PREGUNTAS Y RESPUESTAS******");
+            System.out.println("\n******SISTEMA DE PREGUNTAS Y RESPUESTAS******");
             System.out.println("USUARIO REGISTRADO COMO: "+ stack.getListaUsuarios().getUsuario(stack.getIndexActivo()).imprimir());
             System.out.println("1-Agregar pregunta");
             System.out.println("2-Agregar respuesta");
@@ -70,6 +70,7 @@ public class Main {
             System.out.println("5-Votar");
             System.out.println("6-Cerrar sesion");
             System.out.println("7-Cerrar programa");
+            System.out.println("8-Mostrar todo stack");
             System.out.println("Ingrese opcion: ");
             opcion = entrada.nextInt();
             switch(opcion){
@@ -100,6 +101,9 @@ public class Main {
                     break;
                 case 7:
                     return 1;
+                case 8:
+                    stack.imprimirTodo();
+                    break;
                 default:
                     System.out.println("NO EXISTE OPCION ESCOGIDA.");
             }

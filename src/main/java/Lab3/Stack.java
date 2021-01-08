@@ -83,6 +83,7 @@ public class Stack {
         Pregunta pregunta = new Pregunta(this.IDgeneral,titulo,contenido,etiquetas,this.listaUsuarios.getUsuario(this.indexActivo).getUsername());
         this.listaPreguntas.agregarPregunta(pregunta);
         this.IDgeneral = this.IDgeneral +1;
+        System.out.println("PREGUNTA REALIZADA CON EXITO");
     }
     public void answer(int ID,String contenido){
         if(!this.listaPreguntas.verificarIDPregunta(ID)){
@@ -92,6 +93,7 @@ public class Stack {
             Respuesta respuesta = new Respuesta(this.IDgeneral,contenido,this.listaUsuarios.getUsuario(this.indexActivo).getUsername(),ID);
             this.listaRespuestas.agregarRespuesta(respuesta);
             this.IDgeneral = this.IDgeneral +1;
+            System.out.println("RESPUESTA REALIZADA CON EXITO");
         }
     }
     public void reward(int ID, int recompensa){
@@ -101,6 +103,7 @@ public class Stack {
                     Recompensa nuevaRecompensa = new Recompensa(recompensa,this.indexActivo);
                     this.getListaUsuarios().getUsuario(this.indexActivo).restarReputacionRelativa(recompensa);
                     this.listaPreguntas.getPregunta(ID).getListaRecompensa().agregarRecompensa(nuevaRecompensa);
+                    System.out.println("PREGUNTA REALIZADA CON EXITO");
                 }
                 else{
                     System.out.println("NO POSEE LA SUFICIENTE REPUTACION");
@@ -123,7 +126,7 @@ public class Stack {
                 // Verificar que estado
                 //verificar que pertenezca a la pregunta
                 if(this.listaRespuestas.verificarID(IDRespuesta)){
-                    if(!this.listaRespuestas.getRespuesta(IDRespuesta).getEstado() || this.listaRespuestas.getRespuesta(IDRespuesta).getPreguntaRespondida() == IDPregunta){
+                    if(!this.listaRespuestas.getRespuesta(IDRespuesta).getEstado() && this.listaRespuestas.getRespuesta(IDRespuesta).getPreguntaRespondida() == IDPregunta){
                         if(this.listaPreguntas.getPregunta(IDPregunta).getListaRecompensa().cantidadRecompensas() > 0 && !this.listaPreguntas.getPregunta(IDPregunta).getEstado()){//existe recompensa
                             int recompensaTotal = 0;
                             //Cobrar recompensas en el arrayList de recompensas
@@ -137,9 +140,12 @@ public class Stack {
                             this.listaRespuestas.getRespuesta(IDRespuesta).setEstado(true);
                             //Suma reputacion a usuario que respondio
                             this.listaUsuarios.getUsuarioUsername(this.listaRespuestas.getRespuesta(IDRespuesta).getAutor()).sumarReputacionAbsoluta(recompensaTotal);
+                            System.out.println("RESPUESTA ACEPTADA CON EXITO");
                         }
                         else{
+                            this.listaPreguntas.getPregunta(IDPregunta).setEstado(true);
                             this.listaRespuestas.getRespuesta(IDRespuesta).setEstado(true);
+                            System.out.println("RESPUESTA ACEPTADA CON EXITO");
                         }
                     }
                     else{
@@ -160,22 +166,39 @@ public class Stack {
     }
     public void vote(int ID,boolean opcion){
         if(this.listaPreguntas.verificarIDPregunta(ID)){
-            if(this.getListaPreguntas().getPregunta(ID).aumentarVoto(opcion)){
-                this.listaUsuarios.getUsuarioUsername(this.listaPreguntas.getPregunta(ID).getAutor()).sumarReputacionAbsoluta(10);
+            if(!this.listaPreguntas.getPregunta(ID).getAutor().equals(this.listaUsuarios.getUsuario(this.indexActivo).getUsername())){
+                if(this.getListaPreguntas().getPregunta(ID).aumentarVoto(opcion)){
+                    this.listaUsuarios.getUsuarioUsername(this.listaPreguntas.getPregunta(ID).getAutor()).sumarReputacionAbsoluta(10);
+                    System.out.println("VOTO POSITIVO REALIZADO CON EXITO");
+                }
+                else{
+                    this.listaUsuarios.getUsuarioUsername(this.listaPreguntas.getPregunta(ID).getAutor()).sumarReputacionAbsoluta(2);
+                    System.out.println("VOTO NEGATIVO REALIZADO CON EXITO");
+                }
             }
             else{
-                this.listaUsuarios.getUsuarioUsername(this.listaPreguntas.getPregunta(ID).getAutor()).sumarReputacionAbsoluta(2);
+                System.out.println("ID INGRESADO NO VALIDO");
             }
         }else if(this.listaRespuestas.verificarID(ID)){//votar una respuesta
-            if(this.listaRespuestas.getRespuesta(ID).aumentarVoto(opcion)){//votar positivamente
-                this.listaUsuarios.getUsuarioUsername(this.listaRespuestas.getRespuesta(ID).getAutor()).sumarReputacionAbsoluta(10);
+            if(!this.listaRespuestas.getRespuesta(ID).getAutor().equals(this.listaUsuarios.getUsuario(this.indexActivo).getUsername()) &&
+                    this.listaRespuestas.getRespuesta(ID).getEstado()){
+                if(this.listaRespuestas.getRespuesta(ID).aumentarVoto(opcion)){//votar positivamente
+                    this.listaUsuarios.getUsuarioUsername(this.listaRespuestas.getRespuesta(ID).getAutor()).sumarReputacionAbsoluta(10);
+                    System.out.println("VOTO POSITIVO REALIZADO CON EXITO");
+                }
+                else{//votar negativamente
+                    this.listaUsuarios.getUsuarioUsername(this.listaRespuestas.getRespuesta(ID).getAutor()).restarReputacionAbsoluta(2);
+                    this.listaUsuarios.getUsuario(this.indexActivo).restarReputacionAbsoluta(2);
+                    System.out.println("VOTO NEGATIVO REALIZADO CON EXITO");
+                }
             }
-            else{//votar negativamente
-                this.listaUsuarios.getUsuarioUsername(this.listaRespuestas.getRespuesta(ID).getAutor()).restarReputacionAbsoluta(2);
-                this.listaUsuarios.getUsuario(this.indexActivo).restarReputacionAbsoluta(2);
+            else{
+                System.out.println("ID INGRESADO NO VALIDO");
             }
         }
-        else{System.out.println("No existe ID");}
+        else{
+            System.out.println("No existe ID");
+        }
     }
     public int imprimirPreguntaRespuesta(){
         int preguntas = 0;
@@ -183,6 +206,7 @@ public class Stack {
             if(this.listaPreguntas.getPreguntaIndex(i).getAutor().equals(this.listaUsuarios.getUsuario(this.indexActivo).getUsername())){
                 this.listaPreguntas.getPreguntaIndex(i).imprimir();
                 preguntas++;
+                System.out.println("   RESPUESTAS ASOCIADAS A LA RESPUESTA");
                 this.listaRespuestas.imprimirRespuestas(this.listaPreguntas.getPreguntaIndex(i).getID());
             }
         }
@@ -192,9 +216,17 @@ public class Stack {
         for(int i = 0; i < this.listaPreguntas.cantidadPreguntas(); i++){
             if(!this.listaPreguntas.getPreguntaIndex(i).getAutor().equals(this.listaUsuarios.getUsuario(this.indexActivo).getUsername())){
                 this.listaPreguntas.getPreguntaIndex(i).imprimir();
+                System.out.println("   RESPUESTAS ASOCIADAS A LA RESPUESTA:");
                 this.listaRespuestas.imprimirRespuestasNoUser(this.listaPreguntas.getPreguntaIndex(i).getID(), this.listaUsuarios.getUsuario(this.indexActivo).getUsername());
             }
         }
 
+    }
+    public void imprimirTodo(){
+        for(int i = 0; i < this.listaPreguntas.cantidadPreguntas();i++){
+            this.listaPreguntas.getPreguntaIndex(i).imprimir();
+            System.out.println("   RESPUESTAS ASOCIADAS A LA RESPUESTA");
+            this.listaRespuestas.imprimirTotalRespuestas(this.listaPreguntas.getPreguntaIndex(i).getID());
+        }
     }
 }
