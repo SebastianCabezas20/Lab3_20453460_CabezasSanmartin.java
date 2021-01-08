@@ -23,7 +23,21 @@ public class ListaPreguntas {
     public int cantidadPreguntas(){
         return this.preguntas.size();
     }
-
+    
+    public void imprimirPreguntas(){
+        for(int i = 0; i < this.preguntas.size();i++){
+            this.preguntas.get(i).imprimir();
+        }
+    }
+    
+    public void imprimirPreguntasRecompensa(){
+        for(int i = 0; i < this.preguntas.size();i++){
+            if(!this.preguntas.get(i).getEstado()){
+                this.preguntas.get(i).imprimir();
+            }
+        }
+    }
+    
     public boolean verificarIDPregunta(int ID){
         for(int i = 0;i < this.preguntas.size(); i++){
             if(this.preguntas.get(i).getID() == ID){
@@ -46,6 +60,9 @@ public class ListaPreguntas {
             }
         }
         return null;
+    }
+     public Pregunta getPreguntaIndex(int index){
+        return this.preguntas.get(index);
     }
  
     

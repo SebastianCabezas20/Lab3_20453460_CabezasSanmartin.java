@@ -39,5 +39,29 @@ public class ListaRespuestas {
         }
         return false;
     }
+    public void imprimirRespuestas(int IDPregunta){
+        int respuestas = 0;
+        for(int i = 0; i < this.listaRespuesta.size();i++){
+            if(this.listaRespuesta.get(i).getPreguntaRespondida() == IDPregunta && !this.listaRespuesta.get(i).getEstado()){
+                respuestas++;
+                this.listaRespuesta.get(i).imprimirRespuesta();
+            }
+        }
+        if(respuestas == 0){
+            System.out.println("NO TIENE RESPUESTAS PENDIENTES");
+        }
+    }
+    public void imprimirRespuestasNoUser(int IDPregunta,String username){
+        int respuestas = 0;
+        for(int i = 0; i < this.listaRespuesta.size();i++){
+            if(this.listaRespuesta.get(i).getPreguntaRespondida() == IDPregunta && this.listaRespuesta.get(i).getEstado() && !this.listaRespuesta.get(i).getAutor().equals(username)){
+                respuestas++;
+                this.listaRespuesta.get(i).imprimirRespuesta();
+            }
+        }
+        if(respuestas == 0){
+            System.out.println("NO TIENE RESPUESTAS PENDIENTES");
+        }
+    }
 }
 

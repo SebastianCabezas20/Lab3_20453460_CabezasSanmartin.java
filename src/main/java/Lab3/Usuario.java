@@ -18,8 +18,8 @@ public class Usuario {
     public Usuario(String username, String pass) {
         this.username = username;
         this.pass = pass;
-        this.reputacion = 0;
-        this.reputacionRelativa = 0;
+        this.reputacion = 1000;
+        this.reputacionRelativa = 1000;
     }
 
     public String getUsername() {
@@ -42,16 +42,8 @@ public class Usuario {
         return reputacion;
     }
 
-    public void setReputacion(int reputacion) {
-        this.reputacion = reputacion;
-    }
-
     public int getReputacionRelativa() {
         return reputacionRelativa;
-    }
-
-    public void setReputacionRelativa(int reputacionRelativa) {
-        this.reputacionRelativa = reputacionRelativa;
     }
     
     public void restarReputacionRelativa (int Reputacion){
@@ -62,5 +54,8 @@ public class Usuario {
     }
     public void sumarReputacionAbsoluta (int Reputacion){
         this.reputacion = this.reputacion + Reputacion;
+    }
+    public String imprimir(){
+        return this.username + " reputacion: " + this.reputacion;
     }
 }

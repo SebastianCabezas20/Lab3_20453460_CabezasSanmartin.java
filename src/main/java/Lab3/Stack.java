@@ -96,7 +96,7 @@ public class Stack {
     }
     public void reward(int ID, int recompensa){
         if(this.listaPreguntas.verificarIDPregunta(ID)){ 
-            if(this.listaPreguntas.getPregunta(ID).getEstado()){
+            if(!this.listaPreguntas.getPregunta(ID).getEstado()){
                 if(recompensa <= this.listaUsuarios.getUsuario(this.indexActivo).getReputacionRelativa()){
                     Recompensa nuevaRecompensa = new Recompensa(recompensa,this.indexActivo);
                     this.getListaUsuarios().getUsuario(this.indexActivo).restarReputacionRelativa(recompensa);
@@ -160,10 +160,41 @@ public class Stack {
     }
     public void vote(int ID,boolean opcion){
         if(this.listaPreguntas.verificarIDPregunta(ID)){
-            this.getListaPreguntas().getPregunta(ID).aumentarVoto(opcion);
-        }else if(this.listaRespuestas.verificarID(ID)){
-            this.listaRespuestas.getRespuesta(ID).aumentarVoto(opcion);
+            if(this.getListaPreguntas().getPregunta(ID).aumentarVoto(opcion)){
+                this.listaUsuarios.getUsuarioUsername(this.listaPreguntas.getPregunta(ID).getAutor()).sumarReputacionAbsoluta(10);
+            }
+            else{
+                this.listaUsuarios.getUsuarioUsername(this.listaPreguntas.getPregunta(ID).getAutor()).sumarReputacionAbsoluta(2);
+            }
+        }else if(this.listaRespuestas.verificarID(ID)){//votar una respuesta
+            if(this.listaRespuestas.getRespuesta(ID).aumentarVoto(opcion)){//votar positivamente
+                this.listaUsuarios.getUsuarioUsername(this.listaRespuestas.getRespuesta(ID).getAutor()).sumarReputacionAbsoluta(10);
+            }
+            else{//votar negativamente
+                this.listaUsuarios.getUsuarioUsername(this.listaRespuestas.getRespuesta(ID).getAutor()).restarReputacionAbsoluta(2);
+                this.listaUsuarios.getUsuario(this.indexActivo).restarReputacionAbsoluta(2);
+            }
         }
         else{System.out.println("No existe ID");}
+    }
+    public int imprimirPreguntaRespuesta(){
+        int preguntas = 0;
+        for(int i = 0; i < this.listaPreguntas.cantidadPreguntas(); i++){
+            if(this.listaPreguntas.getPreguntaIndex(i).getAutor().equals(this.listaUsuarios.getUsuario(this.indexActivo).getUsername())){
+                this.listaPreguntas.getPreguntaIndex(i).imprimir();
+                preguntas++;
+                this.listaRespuestas.imprimirRespuestas(this.listaPreguntas.getPreguntaIndex(i).getID());
+            }
+        }
+        return preguntas;
+    }
+    public void imprimirPreguntaRespuestaVote(){
+        for(int i = 0; i < this.listaPreguntas.cantidadPreguntas(); i++){
+            if(!this.listaPreguntas.getPreguntaIndex(i).getAutor().equals(this.listaUsuarios.getUsuario(this.indexActivo).getUsername())){
+                this.listaPreguntas.getPreguntaIndex(i).imprimir();
+                this.listaRespuestas.imprimirRespuestasNoUser(this.listaPreguntas.getPreguntaIndex(i).getID(), this.listaUsuarios.getUsuario(this.indexActivo).getUsername());
+            }
+        }
+
     }
 }

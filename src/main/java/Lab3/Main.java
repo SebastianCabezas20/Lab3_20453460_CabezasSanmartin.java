@@ -35,7 +35,7 @@ public class Main {
                     username = informacion.nextLine();
                     System.out.println("Ingrese contraseña");
                     pass = informacion.nextLine();
-                    
+                    stack.Registrar(username, pass);
                     break;
                 case 2:
                     System.out.println("Ingrese username: ");
@@ -53,7 +53,6 @@ public class Main {
                     System.out.println("Opcion no valida");
             }
         }
-    
     }
 
     private static int menuPrincipal(Stack stack) {
@@ -63,7 +62,7 @@ public class Main {
         Scanner informacion = new Scanner(System.in);
         while(salida == 0){
             System.out.println("******SISTEMA DE PREGUNTAS Y RESPUESTAS******");
-            System.out.println("USUARIO REGISTRADO COMO: "+stack.getListaUsuarios().getUsuario(stack.getIndexActivo()).getUsername());
+            System.out.println("USUARIO REGISTRADO COMO: "+ stack.getListaUsuarios().getUsuario(stack.getIndexActivo()).imprimir());
             System.out.println("1-Agregar pregunta");
             System.out.println("2-Agregar respuesta");
             System.out.println("3-Ofrecer recompensa");
@@ -175,6 +174,7 @@ public class Main {
 
     private static void agregarRespuesta(Stack stack) {
         if(stack.getListaPreguntas().cantidadPreguntas() > 0){
+            stack.getListaPreguntas().imprimirPreguntas();
             int ID;
             String contenido;
             Scanner IDPregunta = new Scanner(System.in);
@@ -191,6 +191,7 @@ public class Main {
     }
     private static void agregarRecompensa(Stack stack){
         if(stack.getListaPreguntas().cantidadPreguntas() > 0){
+            stack.getListaPreguntas().imprimirPreguntasRecompensa();
             int ID,recompensa;
             Scanner entrada = new Scanner(System.in);           
             System.out.println("Ingrese ID de pregunta a ofrecer recompensa:");
@@ -207,16 +208,20 @@ public class Main {
     private static void aceptarRespuesta(Stack stack) {
         int IDPregunta,IDRespuesta;
         //Imprimir preguntas
-        
-        Scanner entrada = new Scanner(System.in);
-        System.out.println("Ingrese el ID de la pregunta que contiene la respuesta: ");
-        IDPregunta = entrada.nextInt();
-        System.out.println("Ingrese ID de respuesta:");
-        IDRespuesta = entrada.nextInt();
-        stack.accept(IDPregunta,IDRespuesta);
+        if(stack.imprimirPreguntaRespuesta() > 0){
+            Scanner entrada = new Scanner(System.in);
+            System.out.println("Ingrese el ID de la pregunta que contiene la respuesta: ");
+            IDPregunta = entrada.nextInt();
+            System.out.println("Ingrese ID de respuesta:");
+            IDRespuesta = entrada.nextInt();
+            stack.accept(IDPregunta,IDRespuesta);
+        }else{
+            System.out.println("NO EXISTEN PREGUNTAS ASOCIADAS AL USUARIO");
+        }
     }
 
     private static void votar(Stack stack) {
+        stack.imprimirPreguntaRespuestaVote();
         Scanner entrada = new Scanner(System.in);
         System.out.println("Ingrese ID A votar: ");
         int ID = entrada.nextInt();

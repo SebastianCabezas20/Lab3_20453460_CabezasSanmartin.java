@@ -67,12 +67,14 @@ public class Respuesta {
     public int getVotosNegativos() {
         return votosNegativos;
     }
-    public void aumentarVoto(boolean opcion){
+    public boolean aumentarVoto(boolean opcion){
         if(opcion){
             this.votosPositivos++;
+            return true;
         }
         else{
             this.votosNegativos++;
+            return false;
         }
     }
     
