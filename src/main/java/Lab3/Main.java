@@ -35,7 +35,7 @@ public class Main {
                     username = informacion.nextLine();
                     System.out.println("Ingrese contraseña");
                     pass = informacion.nextLine();
-                    stack.Registrar(username, pass);
+                    stack.Register(username, pass);
                     break;
                 case 2:
                     System.out.println("Ingrese username: ");
@@ -54,7 +54,10 @@ public class Main {
             }
         }
     }
-
+    /*
+    Es el menu de funcionalidades del stack
+    @param stack corresponde al stack que contiene los objetos
+    */
     private static int menuPrincipal(Stack stack) {
         int salida = 0,opcion;
         String username,pass;
@@ -70,7 +73,6 @@ public class Main {
             System.out.println("5-Votar");
             System.out.println("6-Cerrar sesion");
             System.out.println("7-Cerrar programa");
-            System.out.println("8-Mostrar todo stack");
             System.out.println("Ingrese opcion: ");
             opcion = entrada.nextInt();
             switch(opcion){
@@ -110,7 +112,9 @@ public class Main {
         }
         return 0;
     }
-
+    /*
+    Pide informacion al usuario, ademas de crear la lista de etiquetas
+    @param stack corresponde al stack que contiene los objetos*/
     private static void agregarPregunta(Stack stack) {
         String contenido,titulo,nombreEtiqueta;
         int opcion;
@@ -175,7 +179,9 @@ public class Main {
             }
         }
     }
-
+    /*
+    Pide los datos al usuario para crear la respuesta a una pregunta
+    @param stack corresponde al stack que contiene los objetos*/
     private static void agregarRespuesta(Stack stack) {
         if(stack.getListaPreguntas().cantidadPreguntas() > 0){
             stack.getListaPreguntas().imprimirPreguntas();
@@ -192,7 +198,9 @@ public class Main {
         else{
             System.out.println("NO EXISTEN PREGUNTAS");
         }
-    }
+    }/*
+    Pide informacion al usuario para agregar recompensa
+    @param stack corresponde al stack que contiene los objetos*/
     private static void agregarRecompensa(Stack stack){
         if(stack.getListaPreguntas().cantidadPreguntas() > 0){
             stack.getListaPreguntas().imprimirPreguntasRecompensa();
@@ -207,8 +215,11 @@ public class Main {
         else{
             System.out.println("NO EXISTEN PREGUNTAS");
         }
-    }    
-
+    }
+    /*
+    Pide IDs de pregunta y una determianda respuesta a aceptar
+    @param stack corresponde al stack que contiene los objetos
+    */    
     private static void aceptarRespuesta(Stack stack) {
         int IDPregunta,IDRespuesta;
         //Imprimir preguntas
@@ -223,7 +234,9 @@ public class Main {
             System.out.println("NO EXISTEN PREGUNTAS ASOCIADAS AL USUARIO");
         }
     }
-
+    /*
+    Pide ID y voto para votar una pregunta o respuesta
+    @param stack corresponde al stack que contiene los objetos*/
     private static void votar(Stack stack) {
         stack.imprimirPreguntaRespuestaVote();
         Scanner entrada = new Scanner(System.in);
@@ -243,6 +256,9 @@ public class Main {
         System.out.println("OPCION NO VALIDA");}
         
     }
+    /*
+    Permite cargar el stack con usuarios, preguntas,respuestas y etiquetas
+    @param stack corresponde al stack que contiene los objetos*/
     private static void cargarStack(Stack stack){
         //Cargar etiquetas
         stack.getListaEtiquetas().agregarEtiqueta(new Etiqueta("Java","Todas las descripciones de este lenguaje"));
@@ -251,10 +267,10 @@ public class Main {
         stack.getListaEtiquetas().agregarEtiqueta(new Etiqueta("C","Todas las descripciones de este lenguaje"));
         stack.getListaEtiquetas().agregarEtiqueta(new Etiqueta("Scheme","Todas las descripciones de este lenguaje"));
         //cargar Usuarios
-        stack.Registrar("user1", "pass1");
-        stack.Registrar("user2", "pass2");
-        stack.Registrar("user3", "pass3");
-        stack.Registrar("user4", "pass4");
+        stack.Register("user1", "pass1");
+        stack.Register("user2", "pass2");
+        stack.Register("user3", "pass3");
+        stack.Register("user4", "pass4");
         //cargar preguntas
         ListaEtiquetas etiquetas = new ListaEtiquetas();
         etiquetas.agregarEtiqueta(new Etiqueta("java","Todas las descripciones de este lenguaje"));
